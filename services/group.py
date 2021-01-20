@@ -71,7 +71,17 @@ class GroupMeet:
         
     async def add_users_to_db(self,user_id,choice):
       headers = {'Content-Type': 'application/json'}
-      payload = '{\n"data":{"attributes": {\n"discord_id": '+str(user_id)+',\n "choice\":'+str(choice)+'\n}\n}\n}'
+
+      
+      # payload = {"data":{"attributes": {"discord_id": str(user_id), "choice":str(choice)}}}
+      payload = {
+          "data": {
+              "attributes": {
+                  "discord_id": str(user_id),
+                  "choice": choice
+              }
+          }
+      }
       await send_request(method_type="POST",url="groupcalls/",headers=headers,data=payload)
 
       
